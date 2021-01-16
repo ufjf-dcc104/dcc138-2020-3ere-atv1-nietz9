@@ -31,6 +31,10 @@
             ctx.fillStyle = "#8921AD"; 
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+            //Atualiza estados;
+            x = x + 10*dt;
+            y = 100 + 500*Math.cos(t/200)*dt;
+
             //Desenha o quadrado
             ctx.fillStyle = "#FFFFFF";
             ctx.fillRect(x, y, 20, 20);
