@@ -17,8 +17,7 @@
         let ctx = canvas.getContext("2d");
         canvas.width = 640;
         canvas.height = 480;
-        let x = 100;
-        let y = 150;
+        let x1,y1,x2,y2,x3,y3,x4,y4;
         let t0;
         requestAnimationFrame(desenha); 
 
@@ -28,16 +27,31 @@
             dt = (t-t0)/1000;
 
             //Desenha o fundo 
-            ctx.fillStyle = "#8921AD"; 
+            ctx.fillStyle = "#000000"; 
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             //Atualiza estados;
-            x = x + 10*dt;
-            y = 100 + 500*Math.cos(t/200)*dt;
+            x1 = 320 + 5000*Math.sin(t/400)*dt;
+            y1 = 240 + 5000*Math.cos(t/400)*dt;
+            x2 = 320 + 2000*Math.cos(t/100)*dt;
+            y2 = 240 + 2000*Math.sin(t/100)*dt;
+            x3 = 320 + -8000*Math.sin(t/500)*dt;
+            y3 = 240 + -8000*Math.sin(t/700)*dt;
+            x4 = 320 + 12000*Math.cos(t/300)*dt;
+            y4 = 240 + 12000*Math.cos(t/900)*dt;
 
             //Desenha o quadrado
-            ctx.fillStyle = "#FFFFFF";
-            ctx.fillRect(x, y, 20, 20);
+            ctx.fillStyle = "#FF0000";
+            ctx.fillRect(x1, y1, 20, 20);
+
+            ctx.fillStyle = "#00FF00";
+            ctx.fillRect(x2, y2, 20, 20);
+
+            ctx.fillStyle = "#0000FF";
+            ctx.fillRect(x3, y3, 20, 20);
+
+            ctx.fillStyle = "#F00FCC";
+            ctx.fillRect(x4, y4, 20, 20);
 
             requestAnimationFrame(desenha);
             t0=t;
