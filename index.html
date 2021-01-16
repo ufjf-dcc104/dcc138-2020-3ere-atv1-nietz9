@@ -19,10 +19,14 @@
         canvas.height = 480;
         let x = 100;
         let y = 150;
+        let t0;
+        requestAnimationFrame(desenha); 
 
-        desenha(); 
-        function desenha()
+        function desenha(t)
         {
+            t0 = t0 ?? t;
+            dt = (t-t0)/1000;
+
             //Desenha o fundo 
             ctx.fillStyle = "#8921AD"; 
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -30,6 +34,9 @@
             //Desenha o quadrado
             ctx.fillStyle = "#FFFFFF";
             ctx.fillRect(x, y, 20, 20);
+
+            requestAnimationFrame(desenha);
+            t0=t;
         }
 
     </script>
