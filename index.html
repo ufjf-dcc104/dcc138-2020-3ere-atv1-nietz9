@@ -17,9 +17,21 @@
         let ctx = canvas.getContext("2d");
         canvas.width = 640;
         canvas.height = 480;
+        let x = 100;
+        let y = 150;
 
-        ctx.fillStyle = "#8921AD"; 
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        desenha(); 
+        function desenha()
+        {
+            //Desenha o fundo 
+            ctx.fillStyle = "#8921AD"; 
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            //Desenha o quadrado
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fillRect(x, y, 20, 20);
+        }
+
     </script>
 </body>
 </html>
