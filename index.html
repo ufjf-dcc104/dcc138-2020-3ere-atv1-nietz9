@@ -23,6 +23,14 @@
         let y = 150;
         let vy = 0;
         let ay = 0;
+
+        let ex = 520;
+        let evx = 0;
+        let eax = 0;
+        let ey = 310;
+        let evy = 0;
+        let eay = 0;
+
         const K = 180;
         let t0;
         let dt;
@@ -36,16 +44,28 @@
             //Desenha o fundo 
             ctx.fillStyle = "#8921AD"; 
             ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            //Controladores
+            eay = 0.5*(y - ey) - 0.3 * vy;
+            eax = 0.5*(x - ex) - 0.3 * vx;
 
             //Atualiza dinâmica dos estados;
             x = x + vx*dt;
             vx = vx + ax*dt;
             y = y + vy*dt;
             vy = vy + ay*dt;
+
+            ex = ex + evx*dt;
+            evx = evx + eax*dt;
+            ey = ey + evy*dt;
+            evy = evy + eay*dt;
  
             //Desenha o quadrado
             ctx.fillStyle = "#FFFFFF";
             ctx.fillRect(x, y, 20, 20);
+
+            ctx.fillStyle = "#000000";
+            ctx.fillRect(ex, ey, 20, 20);
 
             requestAnimationFrame(desenha);
             t0=t;
