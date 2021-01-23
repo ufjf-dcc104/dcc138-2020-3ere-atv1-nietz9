@@ -18,8 +18,11 @@
         canvas.width = 640;
         canvas.height = 480;
         let x = 100;
+        let vx = 0;
         let y = 150;
+        let vy = 0;
         let t0;
+        let dt;
         requestAnimationFrame(desenha); 
 
         function desenha(t)
@@ -31,10 +34,10 @@
             ctx.fillStyle = "#8921AD"; 
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            //Atualiza estados;
-            x = x + 10*dt;
-            y = 100 + 500*Math.cos(t/200)*dt;
-
+            //Atualiza dinâmica dos estados;
+            x = x + vx*dt;
+            y = y + vy*dt;
+ 
             //Desenha o quadrado
             ctx.fillStyle = "#FFFFFF";
             ctx.fillRect(x, y, 20, 20);
@@ -42,6 +45,52 @@
             requestAnimationFrame(desenha);
             t0=t;
         }
+
+        addEventListener("keydown", teclaPressionada);
+        addEventListener("keyup", teclaSolta);
+
+        function teclaPressionada(e){
+            //Adiciona controle de velocidades
+            switch (e.key){
+                case "ArrowUp": 
+                    vy = -80;
+                    break;
+
+                case "ArrowDown":
+                    vy = +80; 
+                    break;
+                
+                case "ArrowLeft":
+                    vx = -80; 
+                    break;
+                
+                case "ArrowRight":
+                    vx = +80; 
+                    break;
+            }
+        }
+
+        function teclaSolta(e){
+            //Adiciona controle de velocidades
+            switch (e.key){
+                case "ArrowUp": 
+                    vy = 0;
+                    break;
+
+                case "ArrowDown":
+                    vy = 0; 
+                    break;
+                
+                case "ArrowLeft":
+                    vx = 0; 
+                    break;
+                
+                case "ArrowRight":
+                    vx = 0; 
+                    break;
+            }
+        }
+
 
     </script>
 </body>
