@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DCC138 Exemplo 1</title>
+    <title>DCC138 e.xemplo 1</title>
 </head>
 <body>
-    <h1>DCC138 Exemplo 1</h1>
+    <h1>DCC138 e.xemplo 1</h1>
     <canvas></canvas>
     <p>Por João Nícolas Andrade de Oliveira (2020)</p>
 
@@ -17,19 +17,24 @@
         let ctx = canvas.getContext("2d");
         canvas.width = 640;
         canvas.height = 480;
-        let x = 100;
-        let vx = 0;
-        let ax = 0;
-        let y = 150;
-        let vy = 0;
-        let ay = 0;
+        let p = {
+            x: 100,
+            vx: 0,
+            ax: 0,
+            y: 150,
+            vy: 0,
+            ay: 0
+        };
 
-        let ex = 520;
-        let evx = 0;
-        let eax = 0;
-        let ey = 310;
-        let evy = 0;
-        let eay = 0;
+        let e = {  
+            x: 520,
+            vx: 0,
+            ax: 0,
+            y: 310,
+            vy: 0,
+            ay: 0
+        };
+
 
         const K = 180;
         let t0;
@@ -46,26 +51,26 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
             //Controladores
-            eax = 0.5*(x - ex) - (0.2*evx);
-            eay = 0.5*(y - ey) - (0.2*evy);
+            e.ax = 0.5*(p.x - e.x) - (0.2*e.vx);
+            e.ay = 0.5*(p.y - e.y) - (0.2*e.vy);
 
             //Atualiza dinâmica dos estados;
-            x = x + vx*dt;
-            vx = vx + ax*dt;
-            y = y + vy*dt;
-            vy = vy + ay*dt;
+            p.x = p.x + p.vx*dt;
+            p.vx = p.vx + p.ax*dt;
+            p.y = p.y + p.vy*dt;
+            p.vy = p.vy + p.ay*dt;
 
-            ex = ex + evx*dt;
-            evx = evx + eax*dt;
-            ey = ey + evy*dt;
-            evy = evy + eay*dt;
+            e.x = e.x + e.vx*dt;
+            e.vx = e.vx + e.ax*dt;
+            e.y = e.y + e.vy*dt;
+            e.vy = e.vy + e.ay*dt;
  
             //Desenha o quadrado
             ctx.fillStyle = "#FFFFFF";
-            ctx.fillRect(x, y, 20, 20);
+            ctx.fillRect(p.x, p.y, 20, 20);
 
             ctx.fillStyle = "#000000";
-            ctx.fillRect(ex, ey, 20, 20);
+            ctx.fillRect(e.x, e.y, 20, 20);
 
             requestAnimationFrame(desenha);
             t0=t;
@@ -74,47 +79,47 @@
         addEventListener("keydown", teclaPressionada);
         addEventListener("keyup", teclaSolta);
 
-        function teclaPressionada(e){
+        function teclaPressionada(event){
             //Adiciona controle da aceleração
-            switch (e.key){
+            switch (event.key){
                 case "ArrowUp": 
-                    ay = -K;
+                    p.ay = -K;
                     break;
 
                 case "ArrowDown":
-                    ay = +K; 
+                    p.ay = +K; 
                     break;
                 
                 case "ArrowLeft":
-                    ax = -K; 
+                    p.ax = -K; 
                     break;
                 
                 case "ArrowRight":
-                    ax = +K; 
+                    p.ax = +K; 
                     break;
             }
         }
 
-        function teclaSolta(e){
-            switch (e.key){
+        function teclaSolta(event){
+            switch (event.key){
                 case "ArrowUp": 
-                    vy = 0;
-                    ay = 0;
+                    p.vy = 0;
+                    p.ay = 0;
                     break;
 
                 case "ArrowDown":
-                    vy = 0;
-                    ay = 0; 
+                    p.vy = 0;
+                    p.ay = 0; 
                     break;
                 
                 case "ArrowLeft":
-                    vx = 0;
-                    ax = 0;
+                    p.vx = 0;
+                    p.ax = 0;
                     break;
                 
                 case "ArrowRight":
-                    vx = 0;
-                    ax = 0;
+                    p.vx = 0;
+                    p.ax = 0;
                     break;
             }
         }
