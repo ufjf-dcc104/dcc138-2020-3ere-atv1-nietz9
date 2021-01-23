@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DCC138 e.xemplo 1</title>
+    <title>DCC138 Exemplo 1</title>
 </head>
 <body>
-    <h1>DCC138 e.xemplo 1</h1>
+    <h1>DCC138 Exemplo 1</h1>
     <canvas></canvas>
     <p>Por João Nícolas Andrade de Oliveira (2020)</p>
 
@@ -23,7 +23,12 @@
             ax: 0,
             y: 150,
             vy: 0,
-            ay: 0
+            ay: 0,
+            desenhar: function()
+            {
+                ctx.fillStyle = "#FFFFFF";
+                ctx.fillRect(this.x, this.y, 20, 20);
+            }
         };
 
         let e = {  
@@ -32,7 +37,12 @@
             ax: 0,
             y: 310,
             vy: 0,
-            ay: 0
+            ay: 0,
+            desenhar: function()
+            {
+                ctx.fillStyle = "#000000";
+                ctx.fillRect(this.x, this.y, 20, 20);
+            }
         };
 
 
@@ -66,11 +76,8 @@
             e.vy = e.vy + e.ay*dt;
  
             //Desenha o quadrado
-            ctx.fillStyle = "#FFFFFF";
-            ctx.fillRect(p.x, p.y, 20, 20);
-
-            ctx.fillStyle = "#000000";
-            ctx.fillRect(e.x, e.y, 20, 20);
+            p.desenhar();
+            e.desenhar();
 
             requestAnimationFrame(desenha);
             t0=t;
