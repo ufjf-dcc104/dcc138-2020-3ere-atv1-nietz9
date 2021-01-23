@@ -24,11 +24,9 @@
             y: 150,
             vy: 0,
             ay: 0,
-            desenhar: function()
-            {
-                ctx.fillStyle = "#FFFFFF";
-                ctx.fillRect(this.x, this.y, 20, 20);
-            }
+            cor: "#FFFFFF",
+            desenhar: desenharElemento,
+            mover: moverElemento
         };
 
         let e = {  
@@ -38,11 +36,9 @@
             y: 310,
             vy: 0,
             ay: 0,
-            desenhar: function()
-            {
-                ctx.fillStyle = "#000000";
-                ctx.fillRect(this.x, this.y, 20, 20);
-            }
+            cor: "#000000",
+            desenhar: desenharElemento,
+            mover: moverElemento
         };
 
 
@@ -65,15 +61,8 @@
             e.ay = 0.5*(p.y - e.y) - (0.2*e.vy);
 
             //Atualiza dinâmica dos estados;
-            p.x = p.x + p.vx*dt;
-            p.vx = p.vx + p.ax*dt;
-            p.y = p.y + p.vy*dt;
-            p.vy = p.vy + p.ay*dt;
-
-            e.x = e.x + e.vx*dt;
-            e.vx = e.vx + e.ax*dt;
-            e.y = e.y + e.vy*dt;
-            e.vy = e.vy + e.ay*dt;
+            p.mover();
+            e.mover();
  
             //Desenha o quadrado
             p.desenhar();
@@ -81,6 +70,22 @@
 
             requestAnimationFrame(desenha);
             t0=t;
+        }
+
+
+        function desenharElemento()
+        {
+            ctx.fillStyle = this.cor;
+            ctx.fillRect(this.x, this.y, 20, 20);
+        }
+
+
+        function moverElemento()
+        {
+            this.x = this.x + this.vx*dt;
+            this.vx = this.vx + this.ax*dt;
+            this.y = this.y + this.vy*dt;
+            this.vy = this.vy + this.ay*dt;
         }
 
         addEventListener("keydown", teclaPressionada);
