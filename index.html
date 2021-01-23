@@ -19,8 +19,11 @@
         canvas.height = 480;
         let x = 100;
         let vx = 0;
+        let ax = 0;
         let y = 150;
         let vy = 0;
+        let ay = 0;
+        const K = 180;
         let t0;
         let dt;
         requestAnimationFrame(desenha); 
@@ -36,7 +39,9 @@
 
             //Atualiza dinâmica dos estados;
             x = x + vx*dt;
+            vx = vx + ax*dt;
             y = y + vy*dt;
+            vy = vy + ay*dt;
  
             //Desenha o quadrado
             ctx.fillStyle = "#FFFFFF";
@@ -50,43 +55,46 @@
         addEventListener("keyup", teclaSolta);
 
         function teclaPressionada(e){
-            //Adiciona controle de velocidades
+            //Adiciona controle da aceleração
             switch (e.key){
                 case "ArrowUp": 
-                    vy = -80;
+                    ay = -K;
                     break;
 
                 case "ArrowDown":
-                    vy = +80; 
+                    ay = +K; 
                     break;
                 
                 case "ArrowLeft":
-                    vx = -80; 
+                    ax = -K; 
                     break;
                 
                 case "ArrowRight":
-                    vx = +80; 
+                    ax = +K; 
                     break;
             }
         }
 
         function teclaSolta(e){
-            //Adiciona controle de velocidades
             switch (e.key){
                 case "ArrowUp": 
                     vy = 0;
+                    ay = 0;
                     break;
 
                 case "ArrowDown":
-                    vy = 0; 
+                    vy = 0;
+                    ay = 0; 
                     break;
                 
                 case "ArrowLeft":
-                    vx = 0; 
+                    vx = 0;
+                    ax = 0;
                     break;
                 
                 case "ArrowRight":
-                    vx = 0; 
+                    vx = 0;
+                    ax = 0;
                     break;
             }
         }
