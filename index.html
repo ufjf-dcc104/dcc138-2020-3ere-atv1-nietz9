@@ -46,8 +46,8 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
             //Controladores
-            eay = 0.5*(y - ey) - 0.3 * vy;
-            eax = 0.5*(x - ex) - 0.3 * vx;
+            eax = 0.5*(x - ex) - (0.2*evx);
+            eay = 0.5*(y - ey) - (0.2*evy);
 
             //Atualiza dinâmica dos estados;
             x = x + vx*dt;
