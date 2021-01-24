@@ -29,18 +29,23 @@
             mover: moverElemento
         };
 
-        let e = {  
-            x: 520,
-            vx: 0,
-            ax: 0,
-            y: 310,
-            vy: 0,
-            ay: 0,
-            cor: "#000000",
-            desenhar: desenharElemento,
-            mover: moverElemento,
-            controlar: perseguirAlvo
-        };
+        const sprites = [];
+        for(let ne=0; ne<20; ne++)
+        {
+            let e = {  
+                x: canvas.width * Math.random(),
+                vx: 0,
+                ax: 0,
+                y: canvas.height * Math.random(),
+                vy: 0,
+                ay: 0,
+                cor: "#000000",
+                desenhar: desenharElemento,
+                mover: moverElemento,
+                controlar: perseguirAlvo
+            };
+            sprites.push(e);
+        }
 
 
         const K = 180;
@@ -57,16 +62,21 @@
             ctx.fillStyle = "#8921AD"; 
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            //Controladores
-            e.controlar(p);
 
-            //Atualiza dinâmica dos estados;
             p.mover();
-            e.mover();
- 
-            //Desenha o quadrado
             p.desenhar();
-            e.desenhar();
+            
+            for(let s=0; s<sprites.length; s++)
+            {
+                const sprite = sprites[s];
+                //Controladores
+                sprite.controlar(p);
+                //Atualiza dinâmica dos estados;
+                sprite.mover();
+                //Desenha o quadrado
+                sprite.desenhar();                
+            }
+
 
             requestAnimationFrame(desenha);
             t0=t;
@@ -94,11 +104,12 @@
             this.ay = 0.5*(alvo.y - this.y) - (0.2*this.vy);
         }
         
-        function evitarElemento(alvo)
+        function evitarAlvo(alvo)
         {
             this.ax = -0.5*(alvo.x - this.x) - (0.2*this.vx);
             this.ay = -0.5*(alvo.y - this.y) - (0.2*this.vy);
         }
+        
 
         addEventListener("keydown", teclaPressionada);
         addEventListener("keyup", teclaSolta);
