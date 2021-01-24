@@ -24,6 +24,8 @@
             y: 150,
             vy: 0,
             ay: 0,
+            h: 20,
+            w: 40,
             cor: "#FFFFFF",
             desenhar: desenharElemento,
             mover: moverElemento
@@ -39,6 +41,8 @@
                 y: canvas.height * Math.random(),
                 vy: 0,
                 ay: 0,
+                h: 15,
+                w: 15,
                 cor: "#000000",
                 desenhar: desenharElemento,
                 mover: moverElemento,
@@ -54,6 +58,8 @@
             y: 0,
             vy: 0,
             ay: 0,
+            h: 7,
+            w: 7,
             cor: "blue",
             desenhar: desenharElemento,
             mover: moverElemento,
@@ -116,12 +122,16 @@
                     sprite.ax = 0;
                     pontos -= 3;
                 };
-                ctx.fillStyle = "#000000";
-                ctx.font = "30px Times New Roman"
-                ctx.fillText(pontos, 10, 30); 
+
 
 
             }
+            
+            p.desenhar();
+            
+            ctx.fillStyle = "#000000";
+            ctx.font = "30px Times New Roman"
+            ctx.fillText(pontos, 10, 30); 
 
 
             requestAnimationFrame(desenha);
@@ -132,7 +142,7 @@
         function desenharElemento()
         {
             ctx.fillStyle = this.cor;
-            ctx.fillRect(this.x, this.y, 20, 20);
+            ctx.fillRect(this.x, this.y, this.w, this.h);
         }
 
 
@@ -220,7 +230,7 @@
         }
         function colidiram(A, B){
             return!(
-                ((A.x > B.x+20) || (A.x+20 < B.x)||(A.y > B.y+20) || (A.y+20 < B.y))
+                ((A.x > B.x+B.w) || (A.x+A.w < B.x)||(A.y > B.y+B.h) || (A.y+A.h < B.y))
             )
         }
     </script>
