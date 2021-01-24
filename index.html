@@ -47,6 +47,26 @@
             sprites.push(e);
         }
 
+        let o = {
+            x: -1000,
+            vx: 0,
+            ax: 0,
+            y: 0,
+            vy: 0,
+            ay: 0,
+            cor: "blue",
+            desenhar: desenharElemento,
+            mover: moverElemento,
+            controlar: function(){
+                if (this.x>canvas.width+50){
+                    this.x = -1000;
+                    this.ax = 0;
+                    this.vx = 0;
+                }
+            }
+        };
+        sprites.push(o);
+
 
         const K = 180;
         let t0;
@@ -70,9 +90,9 @@
             {
                 const sprite = sprites[s];
                 //Controladores
-                sprite.controlar(p);
+                sprite.controlar?.(p);
                 //Atualiza dinâmica dos estados;
-                sprite.mover();
+                sprite.mover?.();
                 //Desenha o quadrado
                 sprite.desenhar();                
             }
@@ -156,6 +176,20 @@
                     p.vx = 0;
                     p.ax = 0;
                     break;
+
+                case " ":
+                    if(o.x==-1000)
+                    {
+                        o.x = p.x;
+                        o.y = p.y;
+                        o.vx = 300;
+                        o.ax = 100;
+                    }
+                    break;
+                
+                case "r":
+                    location.reload();
+                    break
             }
         }
 
