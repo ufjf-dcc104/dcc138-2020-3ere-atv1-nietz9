@@ -33,7 +33,7 @@
         for(let ne=0; ne<20; ne++)
         {
             let e = {  
-                x: canvas.width * (1+10*Math.random()),
+                x: canvas.width * (1+Math.random()),
                 vx: 0,
                 ax: 0,
                 y: canvas.height * Math.random(),
@@ -71,6 +71,7 @@
         const K = 300;
         let t0;
         let dt;
+        let pontos = 0;
         requestAnimationFrame(desenha); 
 
         function desenha(t)
@@ -94,7 +95,32 @@
                 //Atualiza dinâmica dos estados;
                 sprite.mover?.();
                 //Desenha o quadrado
-                sprite.desenhar();                
+                sprite.desenhar();        
+                //Testa colisão
+                if(colidiram(o, sprite) && (o !== sprite))
+                {
+                    o.x = -1000;
+                    o.y = -1000;
+                    o.vx = 0;
+                    o.ax = 0;
+                    sprite.x = 1000;
+                    sprite.vx = 100;
+                    sprite.ax = 0;
+                    pontos ++;
+                };
+
+                if(colidiram(p, sprite) && (o !== sprite))
+                {
+                    sprite.x = 1000;
+                    sprite.vx = 100;
+                    sprite.ax = 0;
+                    pontos -= 3;
+                };
+                ctx.fillStyle = "#000000";
+                ctx.font = "30px Times New Roman"
+                ctx.fillText(pontos, 10, 30); 
+
+
             }
 
 
@@ -192,8 +218,11 @@
                     break;
             }
         }
-
-
+        function colidiram(A, B){
+            return!(
+                ((A.x > B.x+20) || (A.x+20 < B.x)||(A.y > B.y+20) || (A.y+20 < B.y))
+            )
+        }
     </script>
 </body>
 </html>
